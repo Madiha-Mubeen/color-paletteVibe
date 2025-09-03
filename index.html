@@ -7,6 +7,20 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+    <h1>Color Palette</h1>
+    <div id="palette-container"></div>
+    <button onclick="generatePalette()">Generate Palette</button>
+
+    <div>
+        <button onclick="generatePalette()">Regenerate Palette</button>
+        <button onclick="generateGradient()">Generate Gradient</button>
+        <button onclick="toggleTheme()">Dark Mode</button>
+    </div>
+
+    <input type="file" id="image-upload" accept="image/*" onchange="extractPaletteFromImage(event)">
+
+    <div id="blobs"></div>
+
+    <script src="script.js"></script>
 </body>
 </html>
