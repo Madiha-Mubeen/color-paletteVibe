@@ -21,7 +21,7 @@ function toggleLock(index) {
 function generatePalette() {
     const container = document.getElementById('palette-container');
     container.innerHTML = '';
-    for(let i = 0; i < 5; i++) {
+    for(let i = 0; i < 50; i++) {
         let color = lockedColors[i] && container.children[i] ? container.children[i].style.background : getRandomColor();
         const rgb = hexToRGB(color);
         const card = document.createElement('div');
@@ -50,7 +50,7 @@ function generatePalette() {
 }
 
 // Gradient Generator
-function generateGraddient() {
+function generateGradient() {
     const colors = [];
     document.querySelectorAll('.color-card').forEach(card => colors.push(card.style.background));
     const gradient = `linear-gradient(90deg, ${colors.join(',')})`;
@@ -60,17 +60,6 @@ function generateGraddient() {
 //Dark/light mode
 function toggleTheme() {
     document.body.classList.toggle('dark');
-}
-
-//Animation blobs
-for (let i = 0; i < 5; i++) {
-    let blob = document.createElement('div');
-    blob.className = 'blob';
-    blob.style.background = getRandomColor();
-    blob.style.left = `${Math.random() * 80}%`;
-    blob.style.top = `${Math.random() * 80}%`;
-    blob.style.width = blob.style.height = `${100 + Math.random() * 150}px`;
-    document.getElementById('blobs').appendChild(blob);
 }
 
 //Image upload palette extraction
@@ -95,7 +84,15 @@ function extractPaletteFromImages(e) {
             colors = Array.from(colors);
             document.getElementById('palette-container').innerHTML = '';
             colors.forEach(c => {
-                
+               const card = document.createElement('div');
+               card.className = 'color-card';
+               card.style.background = c;
+               card.innerHTML = `<div> ${c} </div>`;
+               card.onlclick = () => {
+                navigagtor.clipboard.writeText(c);
+                alert(`${c} copied!`);
+               }
+               document.getElementById('palette-container').appendChild(card);
        });
      }
     }
@@ -125,3 +122,5 @@ function dailyPalette() {
 }
 
 dailyPalette();
+
+document.getElementById("ImageUpload").addEventListener("change", extractPaletteFromImages);
