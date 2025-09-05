@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Color Palette</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <h1>Color Palette</h1>
+    <h1 class="text-5xl">Color Palette</h1>
     <div id="palette-container"></div>
     <button onclick="generatePalette()">Generate Palette</button>
 
@@ -19,7 +20,7 @@
 
     <input type="file" id="image-upload" accept="image/*" onchange="extractPaletteFromImage(event)">
 
-    <div id="blobs"></div>
+    
 
     <script src="script.js"></script>
 </body>

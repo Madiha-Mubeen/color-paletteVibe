@@ -88,8 +88,8 @@ function extractPaletteFromImages(e) {
                card.className = 'color-card';
                card.style.background = c;
                card.innerHTML = `<div> ${c} </div>`;
-               card.onlclick = () => {
-                navigagtor.clipboard.writeText(c);
+               card.onclick = () => {
+                navigator.clipboard.writeText(c);
                 alert(`${c} copied!`);
                }
                document.getElementById('palette-container').appendChild(card);
