@@ -3,17 +3,53 @@ body {
     font-family: 'DM Serif Text', serif;
     margin: 0;
     padding: 0;
-    background: #f0f0f0;
+    background: #58a3e9;
     display: flex;
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
+    padding-top: 100px;
 }
 
+.navbar {
+            width: 100%;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: transparent;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+        }
+        .navbar .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: #033d53;
+            font-weight: bold;
+            text-decoration: underline;
+            text-decoration-style: dotted;
+        }
+        .navbar ul li a {
+            text-decoration: underline;
+            text-decoration-style: dotted;
+            color: #05234b;
+            font-size: 1.9rem;
+            transition: color 0.5s ease;
+        }
+        .navbar li {
+            list-style: none;
+        }
+        .navbar ul li a:hover {
+            color: #789ed6;
+        }
 h1 {
     font-family: 'Playfair Display', serif;
     margin: 20px 0;
     text-align: center;
+    color:  #05234b;
 }
 
 #palette-container {
@@ -44,15 +80,30 @@ h1 {
 }
 
 button {
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    background: #333;
-    color: #fff;
-    transition: background 0.3s;
+    padding: 20px 40px !important;
+    font-size: 16px !important;
+    border: inset !important;
+    border-radius: 11px !important;
+    cursor: pointer !important;
+    background: #1b4b79 !important;
+    color: #9cd6f7 !important;
+    transition: background 0.3s !important;
+}
+
+button.lock-btn {
+    height: 1.9px !important;
+    width: 8px !important;
+    text-align: center !important;
+    color: #9cd3f7 !important;
 }
 button:hover {
-    background: #555;
+    background: #b0eaec !important;
+    color: #09475a !important;
 }
+
+  footer {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #05234b;
+            background-color: semi-transparent;
+        }
