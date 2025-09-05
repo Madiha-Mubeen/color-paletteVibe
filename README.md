@@ -10,7 +10,7 @@ This website is created with the <b> HTML, CSS, & JavaScript </b>, in this websi
 
 ## Technologies & Info Used: 
 <b>- HTML <br>- CSS <br>- JavaScript <br>
-- For color Theory info is collected from google same for pictures of colors !
+- For color Theory info is collected from google same for pictures/bacground image of colors !
 
 ## Difficulties Faced: 
 I have faced bare to minimun type of hardship faced for js logic building, and then how to adject width height of the card of color theory. It was a great time with this!
