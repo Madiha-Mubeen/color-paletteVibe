@@ -11,7 +11,8 @@ function hexToRGB(hex) {
 }
 
 /* Palette Generation */
-let lockedColors = [false,false,false,false,false];
+let colors = Array(50).fill('').map(() => getRandomColor());
+let lockedColors = Array(50).fill(false);
 
 function toggleLock(index) {
     lockedColors[index] = !lockedColors[index];
@@ -21,9 +22,15 @@ function toggleLock(index) {
 function generatePalette() {
     const container = document.getElementById('palette-container');
     container.innerHTML = '';
+
     for(let i = 0; i < 50; i++) {
-        let color = lockedColors[i] && container.children[i] ? container.children[i].style.background : getRandomColor();
-        const rgb = hexToRGB(color);
+        if (!lockedColors[i]) {
+            colors[i] = getRandomColor();
+        }
+
+        const color = colors[i];
+        const rgba = hexToRGB(color);
+
         const card = document.createElement('div');
         card.className = 'color-card';
         card.style.background = color;
@@ -51,9 +58,9 @@ function generatePalette() {
 
 // Gradient Generator
 function generateGradient() {
-    const colors = [];
-    document.querySelectorAll('.color-card').forEach(card => colors.push(card.style.background));
-    const gradient = `linear-gradient(90deg, ${colors.join(',')})`;
+    const colorsArr= colors;
+
+    const gradient = `linear-gradient(90deg, ${colorsArr.join(',')})`;
     document.body.style.background = gradient;
 }
 
@@ -88,11 +95,15 @@ function extractPaletteFromImages(e) {
                card.className = 'color-card';
                card.style.background = c;
                card.innerHTML = `<div> ${c} </div>`;
+
                card.onclick = () => {
                 navigator.clipboard.writeText(c);
                 alert(`${c} copied!`);
-               }
-               document.getElementById('palette-container').appendChild(card);
+            }
+               container.appendChild(card);
+
+               colors[i] = c;
+               lockedColors[i] = false;
        });
      }
     }
@@ -122,5 +133,5 @@ function dailyPalette() {
 }
 
 dailyPalette();
-
-document.getElementById("ImageUpload").addEventListener("change", extractPaletteFromImages);
+/*
+document.getElementById("ImageUpload").addEventListener("change", extractPaletteFromImages); */
