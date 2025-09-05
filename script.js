@@ -29,7 +29,7 @@ function generatePalette() {
         }
 
         const color = colors[i];
-        const rgba = hexToRGB(color);
+        const rgb = hexToRGB(color);
 
         const card = document.createElement('div');
         card.className = 'color-card';
@@ -132,6 +132,4 @@ function dailyPalette() {
     });
 }
 
-dailyPalette();
-/*
-document.getElementById("ImageUpload").addEventListener("change", extractPaletteFromImages); */
+generatePalette();
