@@ -17,3 +17,5 @@ I have faced bare to minimun type of hardship faced for js logic building, and t
 
 ## Link to redirect
 [Color Palette](https://madiha-mubeen.github.io/color-paletteVibe/) 
+<br><br><br>
+[![Athena Award Badge](https://img.shields.io/endpoint?url=https%3A%2F%2Faward.athena.hackclub.com%2Fapi%2Fbadge)](https://award.athena.hackclub.com?utm_source=readme)
