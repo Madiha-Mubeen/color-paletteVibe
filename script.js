@@ -1,3 +1,6 @@
+//JavaScript for color palette generator !!!!!!!
+//Utilities functions adding, random color generator, hex to rgb color, image upload for color generator. 
+//Working 
 function getRandomColor() {
     const hex = Math.floor(Math.random()*16777215).toString(16);
     return `#${hex.padStart(6, '0')}`;
@@ -72,42 +75,56 @@ function toggleTheme() {
 //Image upload palette extraction
 function extractPaletteFromImages(e) {
     const file = e.target.files[0];
+    if (!file) return;
     const reader = new FileReader();
     reader.onload = function() {
         const img = new Image();
         img.src = reader.result;
+
         img.onload = function() {
-            const canvas = document.createElement('canvas');
-            canvas.width = img.width;
-            canvas.height = img.height;
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(img,0,0);
-            const data = ctx.getImageData(0,0,canvas.width, canvas.height).data;
-            let colors = new Set();
-            for (let i = 0; i < data.length; i += 4) {
-                colors.add(`rgb(${data[i]},${data[i + 1]}, ${data[i + 2]})`);
-                if(colors.size >= 5) break;
-            }
-            colors = Array.from(colors);
-            document.getElementById('palette-container').innerHTML = '';
-            colors.forEach(c => {
-               const card = document.createElement('div');
-               card.className = 'color-card';
-               card.style.background = c;
-               card.innerHTML = `<div> ${c} </div>`;
+            Vibrant.from(img).getPalette()
+                .then(palette => {
+                    const container = document.getElementById('palette-container');
+                    container.innerHTML = '';
 
-               card.onclick = () => {
-                navigator.clipboard.writeText(c);
-                alert(`${c} copied!`);
-            }
-               container.appendChild(card);
+                Object.keys(palette).forEach((swatch, index) => {
+                    if (palette[swatch]) {
+                        const rgb = palette[swatch].getRgb();
+                        const hex = palette[swatch].getHex();
+                        const color = `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
+                        const card = document.createElement('div');
+                        card.className = 'color-card';
+                        card.style.background = hex;
+                       
+                        const info = document.createElement('div');
+                        info.innerHTML = `<div>${swatch}</div><div>${hex}</div><div>${color}</div>`;
+                        card.appendChild(info);
+                        
+                        const lockBtn = document.createElement('button');
+                        lockBtn.className = 'lock-btn';
+                        lockBtn.innerText = lockedColors[index] ? 'Unlock' : 'Lock';
+                        lockBtn.onclick = (e) => {
+                            e.stopPropagation();
+                            toggleLock(index);
+                        };
+                        card.appendChild(lockBtn);
+                        
+                        card.onclick = () => {
+                            navigator.clipboard.writeText(hex);
+                            alert(`${hex} Copied to the clipboard!`);
+                        };
 
-               colors[i] = c;
-               lockedColors[i] = false;
-       });
-     }
-    }
-    reader.readAsDataURL(file);
+                        container.appendChild(card);
+
+                        //Stores the color
+                        colors[index] = hex;
+                    }
+                });
+                })
+                .catch(err => console.error(err));
+        };
+    };
+        reader.readAsDataURL(file);
 }
 
 function dailyPalette() {
